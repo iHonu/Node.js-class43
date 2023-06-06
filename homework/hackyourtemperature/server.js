@@ -1,15 +1,6 @@
-import express from 'express';
+import app from './app.js';
 
-const app = express();
-app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('hello from backend to frontend!');
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
-
-app.post('/weather', (req, res) => {
-  const cityName = req.body.cityName;
-  res.send(`City name ${cityName} added`);
-});
-
-app.listen(3000);
