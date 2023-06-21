@@ -5,6 +5,8 @@ import { keys } from './sources/keys.js';
 const app = express();
 app.use(express.json());
 
+const convertKelvinToCelsius = (kelvin) => (kelvin - 273.15).toFixed(1);
+
 app.get('/', (req, res) => {
   res.send('hello from backend to frontend!');
 });
@@ -24,7 +26,7 @@ app.post('/weather', async (req, res) => {
   if (data.cod === '404') {
     res.send({ weatherText: 'City is not found!' });
   } else {
-    const temperature = (data.main.temp - 273.15).toFixed(1);
+    const temperature = convertKelvinToCelsius(data.main.temp);
     res.send({
       weatherText: `Current temperature in ${cityName}: ${temperature}°C`,
     });
